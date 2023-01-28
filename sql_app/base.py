@@ -1,5 +1,2 @@
-def main():
-    pass
-    
-if __name__ == '__main__':
-    main()
+from sql_app.database import Base
+from sql_app.models import Pereval
