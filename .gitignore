@@ -1,2 +1,6 @@
 .env
 .commands
+__pycache__
+.idea
+idea
+venv
