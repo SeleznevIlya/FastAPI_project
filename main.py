@@ -1,28 +1,21 @@
-from fastapi import FastAPI, Query, Path, Body
-from schemas import Book, Author
-from typing import List
-
+from fastapi import FastAPI, Depends
+from sql_app.database import SessionLocal
+from routes import routes
+from starlette.requests import Request
+from starlette.responses import Response
 
 app = FastAPI()
 
+@app.middleware("http")
+async def db_session_middleware(request: Request, call_next):
+    response = Response("Internal server error", status_code=500)
+    try:
+        request.state.db = SessionLocal()
+        response = await call_next(request)
+    finally:
+        request.state.db.close()
+    return response
 
 
-@app.post('/book', response_model=Book, response_model_exclude_unset=False)
-def create_book(item: Book):
-    return item
+app.include_router(routes)
 
-
-@app.post('/author')
-def create_author(author: Author = Body(..., embed=True)):
-    return {'author': author}
-
-@app.get('/book')
-def get_book(q: List[str] = Query(['test', 'test2'],
-                            description="search book",)):
-    return q
-
-
-@app.get('/book/{pk}')
-def get_single_book(pk:int = Path(..., gt=1, le=20),
-                    pages: int=Query(None,gt=10, le=500)):
-    return {'pk': pk, 'pages': pages}
