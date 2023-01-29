@@ -1,20 +1,20 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from sql_app.utils import get_db
-from . import service
-from .schemas import PerevalCreate
+from . import crud
+from .schemas import PerevalCreate, PerevalList
+from typing import List
 
 
 router = APIRouter()
 
 
-@router.get('/')
+@router.get('/', response_model=List[PerevalList])
 def get_pereval_list(db: Session = Depends(get_db)):
-    pereval = service.get_pereval_list(db)
-    return pereval
+    return crud.get_pereval_list(db)
 
 
 @router.post('/')
 def create_pereval(item: PerevalCreate, db: Session = Depends(get_db)):
-    return service.create_pereval(db, item)
+    return crud.create_pereval(db, item)
 
