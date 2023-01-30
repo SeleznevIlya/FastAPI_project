@@ -1,5 +1,7 @@
 from pydantic import BaseModel
 from datetime import datetime
+from user.schemas import BaseUser
+from typing import List
 
 
 class PerevalBase(BaseModel):
@@ -8,6 +10,7 @@ class PerevalBase(BaseModel):
     other_title: str
     connect: str
     add_time: datetime
+    user: List[BaseUser]
 
     class Config:
         orm_mode = True
@@ -18,6 +21,10 @@ class PerevalList(PerevalBase):
 
 
 class PerevalCreate(PerevalBase):
+    pass
+
+
+class PerevalUpdate(PerevalBase):
     pass
 
 
