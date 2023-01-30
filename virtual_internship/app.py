@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from sql_app.utils import get_db
 from user.schemas import UserCreate
+from sql_app.base import User
 from . import crud
 from .schemas import PerevalCreate, PerevalList, PerevalUpdate
 from typing import List
@@ -18,6 +19,11 @@ def get_pereval_list(db: Session = Depends(get_db)):
 @router.get('/{pk}/')
 def get_pereval(pk: int, db: Session = Depends(get_db)):
     return crud.get_pereval(db, pk)
+
+
+@router.get('/email/{email}')
+def get_pereval_on_email(email: str, db: Session = Depends(get_db)):
+    return crud.get_pereval_on_email(email, db)
 
 
 @router.put('/{pk}/')

@@ -11,6 +11,7 @@ class PerevalBase(BaseModel):
     connect: str
     add_time: datetime
     user: List[BaseUser]
+    #user_id: int
 
     class Config:
         orm_mode = True

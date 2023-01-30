@@ -4,7 +4,7 @@ from .models import Pereval
 from .schemas import PerevalCreate, PerevalUpdate
 from sql_app.database import engine
 from user.schemas import UserCreate
-from user.models import User
+from sql_app.base import User
 
 
 def get_pereval_list(db: Session):
@@ -14,9 +14,12 @@ def get_pereval_list(db: Session):
 
 def get_pereval(db: Session, pk: int):
     """"Получаем конкретный перевал по pk"""
-    print(db.query(Pereval).get(pk))
-
+    #print(db.query(Pereval).get(pk).user.email)
     return db.query(Pereval).get(pk)
+
+
+def get_pereval_on_email(db: Session, email: User.email):
+    return db.query(Pereval).get(email)
 
 
 def update_pereval(pk: int, item: PerevalUpdate):

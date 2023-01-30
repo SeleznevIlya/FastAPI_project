@@ -1,8 +1,8 @@
 from sql_app.database import Base
 from sqlalchemy import Boolean, Column, String, ForeignKey, Integer, DateTime, Float
 from sqlalchemy.orm import relationship
+from user.models import User
 #from user.models import User
-from sql_app.base import User
 
 
 class Pereval(Base):
