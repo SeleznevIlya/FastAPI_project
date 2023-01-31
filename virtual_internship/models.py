@@ -2,7 +2,6 @@ from sql_app.database import Base
 from sqlalchemy import Boolean, Column, String, ForeignKey, Integer, DateTime, Float
 from sqlalchemy.orm import relationship
 from user.models import User
-#from user.models import User
 
 
 class Pereval(Base):
@@ -17,7 +16,7 @@ class Pereval(Base):
     connect = Column(String)
     add_time = Column(DateTime)
 
-    coodrs = Column(Integer, ForeignKey('coords.id'))
+    coords = Column(Integer, ForeignKey('coords.id'))
     coords_id = relationship("Coords")
 
     level = Column(Integer, ForeignKey('level.id'))
@@ -28,9 +27,12 @@ class Pereval(Base):
     # image = Column()
 
 
-# class PerevalImage(Base):
-#     __tablename__ = "pereval_image"
-#
+class PerevalImage(Base):
+    __tablename__ = "pereval_image"
+
+    id = Column(Integer, primary_key=True, unique=True)
+    pereval_image = Column(String)
+
 
 # class PerevalActivitiesType(Base):
 #     __tablename__ = "Perevals"

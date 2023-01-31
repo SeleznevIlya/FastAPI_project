@@ -14,12 +14,12 @@ def get_pereval_list(db: Session):
 
 def get_pereval(db: Session, pk: int):
     """"Получаем конкретный перевал по pk"""
-    #print(db.query(Pereval).get(pk).user.email)
     return db.query(Pereval).get(pk)
 
 
-def get_pereval_on_email(db: Session, email: User.email):
-    return db.query(Pereval).get(email)
+def get_pereval_on_email(db: Session, email: str):
+    """Получаем перевалы конкретного пользователя по email"""
+    return db.query(Pereval).join(User).filter(User.email == email).all()
 
 
 def update_pereval(pk: int, item: PerevalUpdate):
@@ -36,6 +36,7 @@ def update_pereval(pk: int, item: PerevalUpdate):
 
 
 def create_user(db: Session, item: UserCreate):
+    """Создаём пользователя"""
     user = User(**item.dict())
     db.add(user)
     db.commit()

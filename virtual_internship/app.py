@@ -21,9 +21,9 @@ def get_pereval(pk: int, db: Session = Depends(get_db)):
     return crud.get_pereval(db, pk)
 
 
-@router.get('/email/{email}')
+@router.get('/{email}/')
 def get_pereval_on_email(email: str, db: Session = Depends(get_db)):
-    return crud.get_pereval_on_email(email, db)
+    return crud.get_pereval_on_email(db, email)
 
 
 @router.put('/{pk}/')

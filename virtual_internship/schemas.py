@@ -10,7 +10,10 @@ class PerevalBase(BaseModel):
     other_title: str
     connect: str
     add_time: datetime
-    user: List[BaseUser]
+    user: int
+    coords: int
+    level: int
+    pereval_area: int
     #user_id: int
 
     class Config:
@@ -25,7 +28,14 @@ class PerevalCreate(PerevalBase):
     pass
 
 
-class PerevalUpdate(PerevalBase):
-    pass
+class PerevalUpdate(BaseModel):
+    beauty_title: str
+    title: str
+    other_title: str
+    connect: str
+    add_time: datetime
+    coords: int
+    level: int
+    pereval_area: int
 
 
