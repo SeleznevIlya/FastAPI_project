@@ -9,5 +9,7 @@
 - run server(uvicorn main:app --reload)
 
 
+File '.env.example' includes environment variables required to connect the database.
+
 
 
